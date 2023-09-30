@@ -1,9 +1,10 @@
-FROM nginx
+FROM nginx:latest
 
-COPY wrapper.sh /
+# Copy your HTML file to the Nginx web server's default root directory
+COPY web.html /usr/share/nginx/html/
 
-RUN chmod +x /wrapper.sh
+# Expose port 80 to allow external access
+EXPOSE 80
 
-COPY html /usr/share/nginx/html
-
-CMD ["./wrapper.sh"]
+# Start Nginx when the container runs
+CMD ["nginx", "-g", "daemon off;"]
